@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:clean_arch/prsentation/resources/assets_manager.dart';
 import 'package:clean_arch/prsentation/resources/color_manager.dart';
-import 'package:clean_arch/prsentation/resources/constants_manager%5D.dart';
+import 'package:clean_arch/prsentation/resources/constants_manager.dart';
 import 'package:clean_arch/prsentation/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _startTimer(){
     _timer = Timer(const Duration(seconds: AppConstants.splashDelay),() => _goNext());
+
   }
 
   void _goNext() => Navigator.pushReplacementNamed(context, Routes.onBoarding);
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorManager.primary,
-      body: Center(child:Image(image: AssetImage(ImageAssets.splashImage),),),
+      body: const Center(child:const Image(image: AssetImage(ImageAssets.splashImage),),),
     );
   }
 

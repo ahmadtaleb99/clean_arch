@@ -1,7 +1,7 @@
 import 'package:clean_arch/prsentation/forgot_password/forgot_password_screen.dart';
 import 'package:clean_arch/prsentation/login/login_screen.dart';
 import 'package:clean_arch/prsentation/main/main_screen.dart';
-import 'package:clean_arch/prsentation/onboarding_screen/onboarding_screen.dart';
+import 'package:clean_arch/prsentation/onboarding_screen/view/onboarding_screen.dart';
 import 'package:clean_arch/prsentation/register/register_screen.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 import 'package:clean_arch/prsentation/splash/splash_screen.dart';
