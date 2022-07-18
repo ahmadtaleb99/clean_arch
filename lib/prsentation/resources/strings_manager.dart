@@ -12,6 +12,11 @@ class AppStrings{
   static const String onboardingSubTitle2 ='onboardingSubTitle2 onboardingSubTitle2 onboardingSubTitle2';
   static const String onboardingSubTitle3 ='onboardingSubTitle3 onboardingSubTitle3 onboardingSubTitle3';
   static const String onboardingSubTitle4 ='onboardingSubTitle4 onboardingSubTitle4 onboardingSubTitle4';
+  static const String login ='login';
+  static const String forgetPassword ='Forgot Password';
+  static const String notAMember ='Not a member ? Sign up';
+  static const String username ='username';
+  static const String password ='password';
 
 
 }

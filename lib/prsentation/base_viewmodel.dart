@@ -3,5 +3,9 @@ abstract class BaseViewModel extends BaseViewModelInputs with BaseViewModelOutpu
   void dispose();
 }
 
-abstract class BaseViewModelInputs{}
-abstract class BaseViewModelOutputs{}
+abstract class BaseViewModelInputs{
+
+}
+abstract class BaseViewModelOutputs{
+
+}

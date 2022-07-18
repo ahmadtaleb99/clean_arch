@@ -1,19 +1,9 @@
+import 'package:clean_arch/prsentation/common/freezed_data_classes.dart';
+
 void main (){
-  String? x;
-    int? s = null;
-
-    int as = s.orZero();
-  print(x.orEmpty());
-  print('x.orEmpty()');
-  print(x.orEmpty());
-  print(as);
-}
-
-extension NotNullString on String?{
-  String orEmpty () => this == null ? '' : this!;
-}
-
-extension NotEmptyInt on int?{
-  int orZero () => this == null ? 0 : this!;
+    var kza = LoginObject('asd','asd');
+    var kza1 = LoginObject('asd','asd');
+    print(kza1 == kza );
+    print(kza1.toString() );
 }
 

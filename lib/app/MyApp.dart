@@ -21,9 +21,10 @@ class _MyAppState extends State<MyApp> {
         designSize: const Size(375, 667),
     builder: (context , child ){
       return MaterialApp(
+
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.splashRoute,
+        initialRoute: Routes.loginRoute,
         theme: getApplicationTheme(),
 
       );

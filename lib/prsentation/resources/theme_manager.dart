@@ -51,14 +51,50 @@ ThemeData getApplicationTheme() {
     textTheme: TextTheme(
 
         overline: getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
-        headline1: getSemiBoldStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s16),
-        headline2: getRegularStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s14),
-        subtitle1: getMediumStyle(
-            color: ColorManager.lightGrey, fontSize: FontSize.s14),
+        headline1: getSemiBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        headline2: getRegularStyle(color: ColorManager.darkGrey, fontSize: FontSize.s14),
+        subtitle1: getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
         caption: getRegularStyle(color: ColorManager.grey1),
-        bodyText1: getRegularStyle(color: ColorManager.grey)),
+        bodyText1: getRegularStyle(color: ColorManager.grey),
+        bodyText2: getRegularStyle(color: ColorManager.primary)
+    ),
+
     //input decoration
+    inputDecorationTheme: InputDecorationTheme(
+
+      // content padding
+        contentPadding: const EdgeInsets.all(AppPadding.p8),
+        // hint style
+        hintStyle:
+        getRegularStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
+        labelStyle:
+        getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+        errorStyle: getRegularStyle(color: ColorManager.error),
+
+        // enabled border style
+        enabledBorder: OutlineInputBorder(
+            borderSide:
+            BorderSide(color: ColorManager.lightGrey.withOpacity(0.5), width: AppSize.s1_5),
+            borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+
+        // focused border style
+        focusedBorder: OutlineInputBorder(
+            borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
+            borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+
+        // error border style
+        errorBorder: OutlineInputBorder(
+            borderSide:
+            BorderSide(color: ColorManager.error, width: AppSize.s1_5),
+            borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+        // focused border style
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
+            borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
+    // label style
+
+
   );
 }
