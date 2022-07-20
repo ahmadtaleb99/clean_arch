@@ -18,5 +18,7 @@ class AppStrings{
   static const String username ='username';
   static const String password ='password';
 
-
+  static const String retryAgain = "Retry again";
+  static const String ok = "Ok";
+  static const String loading = "Loading ...";
 }

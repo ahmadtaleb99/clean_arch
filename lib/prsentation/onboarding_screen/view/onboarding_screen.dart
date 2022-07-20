@@ -5,7 +5,6 @@ import 'package:clean_arch/prsentation/onboarding_screen/viewmodel/onboarding_vi
 import 'package:clean_arch/prsentation/resources/assets_manager.dart';
 import 'package:clean_arch/prsentation/resources/color_manager.dart';
 import 'package:clean_arch/prsentation/resources/constants_manager.dart';
-import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 import 'package:clean_arch/prsentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -165,7 +164,7 @@ class PageWidget extends StatelessWidget {
     );
   }
 
-  PageWidget({
+  const PageWidget({
     this.key,
     required this.sliderPageObject,
   });

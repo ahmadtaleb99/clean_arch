@@ -1,8 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
 import 'dart:developer';
 import 'package:clean_arch/prsentation/common/freezed_data_classes.dart';
 import 'package:clean_arch/domain/usecase/login_usecase.dart';
 import 'package:clean_arch/prsentation/base_viewmodel.dart';
+import 'package:clean_arch/prsentation/common/state_renderer/state_renderer.dart';
+import 'package:clean_arch/prsentation/common/state_renderer/state_renderer_impl.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -25,7 +29,7 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void start() {
-    // TODO: implement start
+    inputState.add(ContentState());
   }
 
   @override
@@ -47,7 +51,6 @@ class LoginViewModel extends BaseViewModel
 
   void setUser(String user) {
 
-    log(user);
     inputUsername.add(user);
     _loginObject = _loginObject.copyWith(username: user);
     _areAllValidController.add(null);
@@ -64,9 +67,14 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void login() async {
+    inputState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING, message: 'loggin in '));
     var either = await _loginUseCase.execute(
         LoginUseCaseInput(_loginObject.username, _loginObject.password));
-    either.fold((failure) => print(failure.message), (data) => null);
+    either.fold((failure) {
+      inputState.add(ErrorState(stateRendererType: StateRendererType.POPUP_ERROR, message: failure.message));
+    }, (data) => {
+
+    } );
   }
 
   @override

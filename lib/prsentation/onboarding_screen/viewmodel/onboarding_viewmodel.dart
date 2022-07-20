@@ -7,7 +7,7 @@ import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 
 class OnboardingViewModel extends BaseViewModel
     with OnboardingViewModelOutputs, OnboardingViewModelInputs {
-  StreamController _streamController = StreamController<SliderPageViewObject>();
+  final StreamController _streamController = StreamController<SliderPageViewObject>();
   int currentIndex = 0;
   late final List _pagesList;
   @override

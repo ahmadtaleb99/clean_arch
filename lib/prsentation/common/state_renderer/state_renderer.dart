@@ -1,0 +1,136 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:clean_arch/prsentation/resources/assets_manager.dart';
+import 'package:clean_arch/prsentation/resources/color_manager.dart';
+import 'package:clean_arch/prsentation/resources/font_manager.dart';
+import 'package:clean_arch/prsentation/resources/strings_manager.dart';
+import 'package:clean_arch/prsentation/resources/style_manager.dart';
+import 'package:clean_arch/prsentation/resources/values_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+
+enum StateRendererType {
+  POPUP_LOADING,
+  POPUP_ERROR,
+
+  FULLSCREEN_LOADING,
+  FULLSCREEN_ERROR,
+  FULLSCREEN_EMPTY,
+
+  CONTENT_STATE //SUCCEESS
+}
+
+class StateRenderer extends StatelessWidget {
+  final StateRendererType stateRendererType;
+  final String title;
+  final String message;
+  final Function onRetryButton;
+
+  @override
+  Widget build(BuildContext context) {
+    return _getWidget(stateRendererType, context);
+  }
+
+  Widget _getWidget(StateRendererType stateRendererType, BuildContext context) {
+    switch (stateRendererType) {
+      case StateRendererType.POPUP_LOADING:
+
+        return _getPopUpDialog(context, [_getAnimatedImage(AnimationAssets.loading)]);
+
+      case StateRendererType.POPUP_ERROR:
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(AnimationAssets.error),
+          _getMessage(message),
+          _getRetryButton(AppStrings.ok, context)
+        ]);
+      case StateRendererType.FULLSCREEN_LOADING:
+        return Container();
+
+      case StateRendererType.FULLSCREEN_ERROR:
+     return   _getItemsColumn( [
+          _getAnimatedImage(AnimationAssets.error),
+          _getMessage(message),
+          _getRetryButton(AppStrings.retryAgain, context)
+        ]);
+
+        break;
+      case StateRendererType.FULLSCREEN_EMPTY:
+        return _getItemsColumn([_getAnimatedImage(AnimationAssets.empty), _getMessage(message)]);
+
+      case StateRendererType.CONTENT_STATE:
+       return Container();
+    }
+  }
+
+
+  Widget _getPopUpDialog(BuildContext context, List<Widget> children) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.s14)),
+      elevation: AppSize.s1_5,
+      backgroundColor: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+            color: ColorManager.white,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(AppSize.s14),
+            boxShadow: const [BoxShadow(color: Colors.black26)]),
+        child: _getDialogContent(context, children),
+
+      ),
+    );
+  }
+
+  Widget _getDialogContent(BuildContext context, List<Widget> children) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
+  }
+
+
+  Widget _getAnimatedImage(String animation) {
+    return SizedBox(
+      height: AppSize.s100,
+      width: AppSize.s100,
+      child: Lottie.asset(animation), // todo add json image here
+    );
+  }
+
+  Widget _getItemsColumn(List<Widget> children) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: children);
+  }
+
+  Widget _getMessage(String message) {
+    return Text(
+      message,
+      style: getRegularStyle(color: ColorManager.black, fontSize: FontSize.s18),
+    );
+  }
+
+  Widget _getRetryButton(String buttonTitle, BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+
+          if (this.stateRendererType == StateRendererType.FULLSCREEN_ERROR) {
+            this.onRetryButton.call();
+
+          } else {
+            Navigator.pop(context);
+          }
+        },
+        child: Text(buttonTitle));
+  }
+
+  const StateRenderer({
+    required this.stateRendererType,
+     this.title ='',
+    required this.message,
+    required this.onRetryButton,
+  });
+}

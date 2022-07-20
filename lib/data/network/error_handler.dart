@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:clean_arch/data/network/failure.dart';
 import 'package:dio/dio.dart';
 

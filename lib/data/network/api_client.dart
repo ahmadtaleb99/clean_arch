@@ -14,7 +14,7 @@ factory ApiClient(Dio dio, {String  baseUrl}) = _ApiClient;
 
 
  @POST('/customer/login')
- Future<AuthenticationResponse> login(@Field('email') String username,@Field('password') String password);
+ Future<AuthenticationResponse> login(@Field('username') String username,@Field('password') String password);
 
 
 

@@ -1,3 +1,4 @@
+import 'package:clean_arch/app/dependency_injection.dart';
 import 'package:clean_arch/prsentation/forgot_password/forgot_password_screen.dart';
 import 'package:clean_arch/prsentation/login/view/login_screen.dart';
 import 'package:clean_arch/prsentation/main/main_screen.dart';
@@ -6,7 +7,6 @@ import 'package:clean_arch/prsentation/register/register_screen.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 import 'package:clean_arch/prsentation/splash/splash_screen.dart';
 import 'package:clean_arch/prsentation/store_details/store_details_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -24,6 +24,7 @@ class RouteGenerator {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());

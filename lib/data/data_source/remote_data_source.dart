@@ -7,7 +7,7 @@ abstract class RemoteDataSource{
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource{
-  ApiClient _apiClient;
+  final ApiClient _apiClient;
   RemoteDataSourceImpl(this._apiClient);
 
   @override

@@ -17,3 +17,13 @@ class ImageAssets{
 
 
 }
+class AnimationAssets{
+  static const String _animationBase = 'assets/animation';
+
+  static const String error = '$_animationBase/error.json';
+  static const String loading = '$_animationBase/loading.json';
+  static const String empty = '$_animationBase/empty.json';
+  static const String success = '$_animationBase/success.json';
+
+
+}

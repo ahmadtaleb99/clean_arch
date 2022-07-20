@@ -1,5 +1,7 @@
 //setting for dio we will give to Api Client
 
+// ignore_for_file: constant_identifier_names
+
 import 'package:clean_arch/app/app_prefs.dart';
 import 'package:clean_arch/prsentation/resources/constants_manager.dart';
 import 'package:dio/dio.dart';
@@ -10,6 +12,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 
 const String APPLICATION_JSON = "application/json";
+// ignore: constant_identifier_names
 const String CONTENT_TYPE = "content-type";
 const String ACCEPT = "accept";
 const String AUTHORIZATION = "authorization";

@@ -49,6 +49,7 @@ dependencies:
   shared_preferences: ^2.0.15
   freezed: ^1.1.0
   get_it: ^7.2.0
+  lottie: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
 
   assets:
      - assets/images/
+     - assets/animation/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
