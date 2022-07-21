@@ -1,4 +1,5 @@
 import 'package:clean_arch/data/responses/responses.dart';
+import 'package:clean_arch/data/responses/responses.dart';
 import 'package:clean_arch/domain/model/models.dart';
 import 'package:clean_arch/app/extenstions.dart';
 
@@ -25,4 +26,12 @@ extension AuthenticationMapper on AuthenticationResponse?{
   Authentication toDomain () {
     return Authentication(customer: this?.customerResponse.toDomain(), contact: this?.contactResponse.toDomain());
 }
+
+
+}
+
+extension ForgetPasswordMapper on ForgetPasswordResponse?{
+  ForgetPassword toDomain() {
+    return ForgetPassword(support: this?.support.orEmpty() ?? '');
+  }
 }

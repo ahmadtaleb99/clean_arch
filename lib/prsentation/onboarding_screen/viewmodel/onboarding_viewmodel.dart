@@ -18,15 +18,14 @@ class OnboardingViewModel extends BaseViewModel
   @override
   void start() {
     _pagesList = _getListData();
-  _postDataToView();
+    _postDataToView();
 }
 
   @override
   int goNext() => currentIndex == _pagesList.length - 1 ? 0 : ++currentIndex;
 
   @override
-  int goPrevious() =>
-      currentIndex == 0 ? _pagesList.length - 1 : --currentIndex;
+  int goPrevious() => currentIndex == 0 ? _pagesList.length - 1 : --currentIndex;
 
   @override
   void onPageChanged(int index) {

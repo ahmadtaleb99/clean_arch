@@ -19,7 +19,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
   @override
   Future<Either<Failure, Authentication>> login(LoginRequest loginRequest) async{
     if(!await _networkInfo.isConnected){
-     return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+     return Left(ErrorType.NO_INTERNET_CONNECTION.getFailure());
     }
 
     try {
@@ -33,6 +33,24 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
     catch (error){
       return Left(ErrorHandler.handle(error).failure);
     }
+  }
+
+  @override
+  Future<Either<Failure, ForgetPassword>> forgetPassword(ForgetPasswordRequest forgetPasswordRequest) async {
+
+
+   try {
+     final response = await  _remoteDataSource.forgetPassword(forgetPasswordRequest);
+
+     if (response.status == ApiInternal.FAILURE){
+       return Left(Failure( ApiInternal.FAILURE, response.message ?? ResponseMessage.UNKNOWN));
+     }
+
+     return Right(response.toDomain());
+   }
+   catch (error){
+     return Left(ErrorHandler.handle(error).failure);
+   }
   }
 
 }

@@ -64,9 +64,12 @@ class EmptyState extends FlowState {
 extension xFlowState on FlowState {
   Widget getWidget (BuildContext context,Widget widget, Function onRetry){
     switch(runtimeType) {
+
       case LoadingState:
         if (getStateRendererType() == StateRendererType.POPUP_LOADING) {
           // show popup loading
+          dismissOpenedDialog(context);
+
           showPopup(context, getStateRendererType(), getMessage());
           // show content ui of the screen
           return widget;
@@ -80,6 +83,9 @@ extension xFlowState on FlowState {
 
       case ErrorState:
         if (getStateRendererType() == StateRendererType.POPUP_ERROR) {
+          print('error state ');
+          dismissOpenedDialog(context);
+
           // show popup error
           showPopup(context, getStateRendererType(), getMessage());
           // show content ui of the screen
@@ -96,8 +102,8 @@ extension xFlowState on FlowState {
         dismissOpenedDialog(context);
         return widget;
 
-        dismissOpenedDialog(context);
       case EmptyState:
+        dismissOpenedDialog(context);
 
   }  return StateRenderer(
         message: getMessage(),
@@ -105,7 +111,7 @@ extension xFlowState on FlowState {
         onRetryButton:   onRetry);
 }
   showPopup(BuildContext context, StateRendererType stateRendererType,
-      String message) {
+      String message, ) {
     WidgetsBinding.instance?.addPostFrameCallback((_) =>
         showDialog(
             context: context,
@@ -113,7 +119,8 @@ extension xFlowState on FlowState {
                 StateRenderer(
                     stateRendererType: stateRendererType,
                     message: message,
-                  onRetryButton: () {},)));
+                  onRetryButton:  (){
+                  } ,)));
   }
 
 

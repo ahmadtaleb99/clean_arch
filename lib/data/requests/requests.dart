@@ -4,3 +4,9 @@ class LoginRequest{
   LoginRequest(this.username, this.password);
 
 }
+
+class ForgetPasswordRequest{
+  String username;
+  ForgetPasswordRequest(this.username);
+
+}

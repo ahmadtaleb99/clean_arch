@@ -17,5 +17,9 @@ factory ApiClient(Dio dio, {String  baseUrl}) = _ApiClient;
  Future<AuthenticationResponse> login(@Field('username') String username,@Field('password') String password);
 
 
+ @POST('/customer/forget-password')
+ Future<ForgetPasswordResponse> forgetPassword(@Field('username') String username);
+
+
 
 }

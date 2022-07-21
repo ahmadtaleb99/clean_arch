@@ -2,6 +2,8 @@
 
 import 'dart:async';
 import 'dart:developer';
+import 'package:clean_arch/app/app_prefs.dart';
+import 'package:clean_arch/app/dependency_injection.dart';
 import 'package:clean_arch/prsentation/common/freezed_data_classes.dart';
 import 'package:clean_arch/domain/usecase/login_usecase.dart';
 import 'package:clean_arch/prsentation/base_viewmodel.dart';
@@ -20,11 +22,14 @@ class LoginViewModel extends BaseViewModel
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
   final StreamController _areAllValidController = StreamController<void>.broadcast();
+  final StreamController _hasLoggedInSuccessfullyController = StreamController<bool>();
+  final _appPrefs = getIT<AppPreferences>();
   @override
   void dispose() {
     _usernameStreamController.close();
     _passwordStreamController.close();
     _areAllValidController.close();
+    _hasLoggedInSuccessfullyController.close();
   }
 
   @override
@@ -41,9 +46,14 @@ class LoginViewModel extends BaseViewModel
   @override
   Sink get inputUsername => _usernameStreamController.sink;
 
+
+
   @override
   Stream<bool> get outIsPasswordValid => _passwordStreamController.stream
       .map((password) => _isPasswordValid(password));
+
+  @override
+  Stream<bool> get hasLoggedInSuccessfully => _hasLoggedInSuccessfullyController.stream.map((event) => event);
 
   @override
   Stream<bool> get outIsUserValid =>
@@ -67,12 +77,15 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void login() async {
-    inputState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING, message: 'loggin in '));
+    inputState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING , message: 'loggin in '));
     var either = await _loginUseCase.execute(
         LoginUseCaseInput(_loginObject.username, _loginObject.password));
     either.fold((failure) {
       inputState.add(ErrorState(stateRendererType: StateRendererType.POPUP_ERROR, message: failure.message));
-    }, (data) => {
+    }, (data)  {
+      inputState.add(ContentState());
+      _hasLoggedInSuccessfullyController.add(true);
+      _appPrefs.setIsLoggedIn(true);
 
     } );
   }

@@ -52,3 +52,13 @@ class Authentication {
     required this.contact,
   });
 }
+
+
+class ForgetPassword{
+
+  String? support;
+
+  ForgetPassword({
+    required  this.support,
+  });
+}

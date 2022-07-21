@@ -1,5 +1,5 @@
 import 'package:clean_arch/app/dependency_injection.dart';
-import 'package:clean_arch/prsentation/forgot_password/forgot_password_screen.dart';
+import 'package:clean_arch/prsentation/forgot_password/view/forgot_password_screen.dart';
 import 'package:clean_arch/prsentation/login/view/login_screen.dart';
 import 'package:clean_arch/prsentation/main/main_screen.dart';
 import 'package:clean_arch/prsentation/onboarding_screen/view/onboarding_screen.dart';
@@ -10,13 +10,13 @@ import 'package:clean_arch/prsentation/store_details/store_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
-  static const String splashRoute = "/asd";
+  static const String splashRoute = "/";
+  static const String onBoarding = "/onBoarding";
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
   static const String forgotPasswordRoute = "/forgotPassword";
   static const String mainRoute = "/main";
   static const String storeDetailsRoute = "/storeDetails";
-  static const String onBoarding = "/onBoarding";
 }
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {

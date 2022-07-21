@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:clean_arch/app/app_prefs.dart';
+import 'package:clean_arch/app/dependency_injection.dart';
 import 'package:clean_arch/prsentation/resources/assets_manager.dart';
 import 'package:clean_arch/prsentation/resources/color_manager.dart';
 import 'package:clean_arch/prsentation/resources/constants_manager.dart';
@@ -18,15 +20,22 @@ late Timer _timer;
 
 
 class _SplashScreenState extends State<SplashScreen> {
-
+    final _appPrefs = getIT<AppPreferences>();
 
   void _startTimer(){
     _timer = Timer(const Duration(seconds: AppConstants.splashDelay),() => _goNext());
 
   }
 
-  void _goNext() => Navigator.pushReplacementNamed(context, Routes.onBoarding);
-
+  void _goNext() {
+    if (!_appPrefs.isOnboardingScreenViewed()) {
+      Navigator.pushReplacementNamed(context, Routes.onBoarding);
+    }
+    // else if (_appPrefs.isLoggedIn()) {
+    else  {
+      Navigator.pushReplacementNamed(context, Routes.forgotPasswordRoute);
+    }
+  }
 
   @override
   void initState() {

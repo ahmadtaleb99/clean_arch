@@ -67,3 +67,18 @@ class ContactResponse{
 }
 
 
+@JsonSerializable()
+class ForgetPasswordResponse extends BaseResponse{
+
+
+  @JsonKey(name: 'support')
+  String? support;
+
+
+  ForgetPasswordResponse(this.support);
+
+  factory ForgetPasswordResponse.fromJson(Map<String,dynamic> json) => _$ForgetPasswordResponseFromJson(json);
+  Map<String,dynamic> toJson() => _$ForgetPasswordResponseToJson(this);
+}
+
+

@@ -28,7 +28,7 @@ class StateRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _getWidget(stateRendererType, context);
+    return Center(child: _getWidget(stateRendererType, context));
   }
 
   Widget _getWidget(StateRendererType stateRendererType, BuildContext context) {
@@ -41,10 +41,12 @@ class StateRenderer extends StatelessWidget {
         return _getPopUpDialog(context, [
           _getAnimatedImage(AnimationAssets.error),
           _getMessage(message),
-          _getRetryButton(AppStrings.ok, context)
+          _getRetryButton(AppStrings.retryAgain, context)
         ]);
       case StateRendererType.FULLSCREEN_LOADING:
-        return Container();
+        return   _getItemsColumn( [
+          _getAnimatedImage(AnimationAssets.loading)
+        ]);
 
       case StateRendererType.FULLSCREEN_ERROR:
      return   _getItemsColumn( [
@@ -114,17 +116,20 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getRetryButton(String buttonTitle, BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: () {
 
-          if (this.stateRendererType == StateRendererType.FULLSCREEN_ERROR) {
-            this.onRetryButton.call();
+            if (this.stateRendererType == StateRendererType.FULLSCREEN_ERROR) {
+              this.onRetryButton.call();
 
-          } else {
-            Navigator.pop(context);
-          }
-        },
-        child: Text(buttonTitle));
+            } else {
+              Navigator.pop(context);
+            }
+          },
+          child: Text(buttonTitle)),
+    );
   }
 
   const StateRenderer({
