@@ -12,12 +12,13 @@ class ErrorHandler implements Exception{
   ErrorHandler.handle(dynamic error){
     //error from api or from dio
     if(error is DioError){
-          failure = _handleError(error);
+          failure = _handleDioError(error);
+          print(error.type);
     }
   }
 
 
-  Failure _handleError(DioError error){
+  Failure _handleDioError(DioError error){
     switch(error.type){
 
       case DioErrorType.connectTimeout:
@@ -27,7 +28,7 @@ class ErrorHandler implements Exception{
         return ErrorType.SEND_TIMEOUT.getFailure();
 
       case DioErrorType.receiveTimeout:
-        return ErrorType.RECIEVE_TIMEOUT.getFailure();
+        return ErrorType.RECEIVE_TIMEOUT.getFailure();
 
       case DioErrorType.cancel:
         return ErrorType.CANCEL.getFailure();
@@ -57,12 +58,12 @@ enum ErrorType {
   NO_CONTENT,
   BAD_REQUEST,
   FORBIDDEN,
-  UNAUTORISED,
+  UNAUTHORISED,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   CONNECT_TIMEOUT,
   CANCEL,
-  RECIEVE_TIMEOUT,
+  RECEIVE_TIMEOUT,
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION
@@ -83,8 +84,8 @@ extension ErrorTypeExtenstion on ErrorType {
       case ErrorType.FORBIDDEN:
         return Failure(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN);
 
-      case ErrorType.UNAUTORISED:
-        return Failure(ResponseCode.UNAUTORISED, ResponseMessage.UNAUTORISED);
+      case ErrorType.UNAUTHORISED:
+        return Failure(ResponseCode.UNAUTHORISED, ResponseMessage.UNAUTHORISED);
 
       case ErrorType.NOT_FOUND:
         return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
@@ -100,9 +101,9 @@ extension ErrorTypeExtenstion on ErrorType {
       case ErrorType.CANCEL:
         return Failure(ResponseCode.CANCEL, ResponseMessage.CANCEL);
 
-      case ErrorType.RECIEVE_TIMEOUT:
+      case ErrorType.RECEIVE_TIMEOUT:
         return Failure(
-            ResponseCode.RECIEVE_TIMEOUT, ResponseMessage.RECIEVE_TIMEOUT);
+            ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
 
       case ErrorType.SEND_TIMEOUT:
         return Failure(ResponseCode.SEND_TIMEOUT, ResponseMessage.SEND_TIMEOUT);
@@ -121,14 +122,14 @@ class ResponseCode {
   static const int SUCCESS = 200; // success with data
   static const int NO_CONTENT = 201; // success with no data (no content)
   static const int BAD_REQUEST = 400; // failure, API rejected request
-  static const int UNAUTORISED = 401; // failure, user is not authorised
+  static const int UNAUTHORISED = 401; // failure, user is not authorised
   static const int FORBIDDEN = 403; //  failure, API rejected request
   static const int INTERNAL_SERVER_ERROR = 500; // failure, crash in server side
   static const int NOT_FOUND = 404; // f
   // local status code
   static const int CONNECT_TIMEOUT = -1; //
   static const int CANCEL = -2; //
-  static const int RECIEVE_TIMEOUT = -3; //
+  static const int RECEIVE_TIMEOUT = -3; //
   static const int SEND_TIMEOUT = -4; //
   static const int CACHE_ERROR = -5; //
   static const int NO_INTERNET_CONNECTION = -6; //
@@ -141,7 +142,7 @@ class ResponseMessage {
       "success"; // success with no data (no content)
   static const String BAD_REQUEST =
       "Bad request, Try again later"; // failure, API rejected request
-  static const String UNAUTORISED =
+  static const String UNAUTHORISED =
       "User is unauthorised, Try again later"; // failure, user is not authorised
   static const String FORBIDDEN =
       "Forbidden request, Try again later"; //  failure, API rejected request
@@ -152,7 +153,7 @@ class ResponseMessage {
   // local status code
   static const String CONNECT_TIMEOUT = "Time out error, Try again later";
   static const String CANCEL = "Request was cancelled, Try again later";
-  static const String RECIEVE_TIMEOUT = "Time out error, Try again later";
+  static const String RECEIVE_TIMEOUT = "Time out error, Try again later";
   static const String SEND_TIMEOUT = "Time out error, Try again later";
   static const String CACHE_ERROR = "Cache error, Try again later";
   static const String NO_INTERNET_CONNECTION =

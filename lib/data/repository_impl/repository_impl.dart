@@ -46,11 +46,19 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
        return Left(Failure( ApiInternal.FAILURE, response.message ?? ResponseMessage.UNKNOWN));
      }
 
+
      return Right(response.toDomain());
    }
    catch (error){
+     print('error catched');
      return Left(ErrorHandler.handle(error).failure);
    }
+  }
+
+  @override
+  Future<Either<Failure, Authentication>> register(RegisterRequest registerRequest) {
+    // TODO: implement register
+    throw UnimplementedError();
   }
 
 }

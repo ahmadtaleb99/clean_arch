@@ -12,12 +12,13 @@ import 'package:lottie/lottie.dart';
 enum StateRendererType {
   POPUP_LOADING,
   POPUP_ERROR,
+  POPUP_SUCCESS,
 
   FULLSCREEN_LOADING,
   FULLSCREEN_ERROR,
   FULLSCREEN_EMPTY,
 
-  CONTENT_STATE //SUCCEESS
+  CONTENT_STATE
 }
 
 class StateRenderer extends StatelessWidget {
@@ -61,6 +62,15 @@ class StateRenderer extends StatelessWidget {
 
       case StateRendererType.CONTENT_STATE:
        return Container();
+
+
+      case StateRendererType.POPUP_SUCCESS:
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(AnimationAssets.success),
+          _getMessage(message),
+          _getRetryButton(AppStrings.ok, context)
+
+        ]);
     }
   }
 
@@ -84,11 +94,14 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getDialogContent(BuildContext context, List<Widget> children) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: children,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: children,
+      ),
     );
   }
 

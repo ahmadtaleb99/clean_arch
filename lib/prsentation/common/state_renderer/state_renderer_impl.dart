@@ -59,6 +59,19 @@ class EmptyState extends FlowState {
 
 
 }
+class SuccessState extends FlowState {
+  String   message ;
+
+  SuccessState(this.message);
+
+  @override
+  String getMessage() => message ;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.POPUP_SUCCESS;
+
+
+}
 
 
 extension xFlowState on FlowState {
@@ -98,12 +111,32 @@ extension xFlowState on FlowState {
               onRetryButton:   onRetry);
         }
 
+      case SuccessState:
+        dismissOpenedDialog(context);
+        if (getStateRendererType() == StateRendererType.POPUP_SUCCESS) {
+          print('success state ');
+
+          // show popup sucess
+          showPopup(context, getStateRendererType(), getMessage());
+          // show content ui of the screen
+          return widget;
+        } else {
+          // full screen loading state
+          return StateRenderer(
+              message: getMessage(),
+              stateRendererType: getStateRendererType(),
+              onRetryButton:   (){});
+        }
+
       case ContentState:
         dismissOpenedDialog(context);
         return widget;
 
       case EmptyState:
         dismissOpenedDialog(context);
+
+
+
 
   }  return StateRenderer(
         message: getMessage(),
