@@ -14,6 +14,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
 
+
   AuthenticationRepositoryImpl(this._remoteDataSource, this._networkInfo);
 
   @override
@@ -56,9 +57,36 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
   }
 
   @override
-  Future<Either<Failure, Authentication>> register(RegisterRequest registerRequest) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<Either<Failure, Authentication>> register(RegisterRequest registerRequest) async {
+    if(!await _networkInfo.isConnected){
+      return Left(ErrorType.NO_INTERNET_CONNECTION.getFailure());
+    }
+
+    try {
+      final AuthenticationResponse response =  await _remoteDataSource.register(registerRequest);
+      if (response.status == ApiInternal.FAILURE){
+        return Left(Failure( ApiInternal.FAILURE, response.message ?? ResponseMessage.UNKNOWN));
+      }
+
+      return Right(response.toDomain());
+    }
+    catch (error){
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Either<Failure, HomeObject>> getHomeData(LoginRequest loginRequest) async{
+    if(!await _networkInfo.isConnected){
+      return Left(ErrorType.NO_INTERNET_CONNECTION.getFailure());
+    }
+
+    try {
+      final response = await  _remoteDataSource.getHomeData();
+      return Right(response.toDomain());
+    }
+    catch (error){
+      return Left(ErrorHandler.handle(error).failure);
+    }
   }
 
 }

@@ -31,9 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!_appPrefs.isOnboardingScreenViewed()) {
       Navigator.pushReplacementNamed(context, Routes.onBoarding);
     }
-    // else if (_appPrefs.isLoggedIn()) {
-    else  {
-      Navigator.pushReplacementNamed(context, Routes.forgotPasswordRoute);
+    else if (_appPrefs.isLoggedIn()) {
+      Navigator.pushReplacementNamed(context, Routes.mainRoute);
     }
   }
 

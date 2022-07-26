@@ -23,4 +23,9 @@ class AppStrings{
   static const String loading = "Loading ...";
   static const String skip = "skip";
   static const String resendEmail = "Didn’t recieve email ? Resesnd";
+
+  static const String home = "Home";
+  static const String search = "Search";
+  static const String notifications = "Notifications";
+  static const String settings = "Settings";
 }

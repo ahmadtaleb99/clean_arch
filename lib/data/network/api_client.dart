@@ -7,7 +7,7 @@ import 'package:retrofit/http.dart';
 
 part 'api_client.g.dart';
 
-@Resgit gitApi(baseUrl: AppConstants.baseUrl)
+@RestApi(baseUrl: AppConstants.baseUrl)
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
@@ -27,4 +27,10 @@ abstract class ApiClient {
     @Field('country_code') String countryCode,
     @Field('profile_picture') String profilePicture,
   );
+
+
+
+  @GET('/home')
+  Future<HomeResponse> getHomeData();
+
 }

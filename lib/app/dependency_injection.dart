@@ -7,8 +7,10 @@ import 'package:clean_arch/data/repository_impl/repository_impl.dart';
 import 'package:clean_arch/domain/repository/repository.dart';
 import 'package:clean_arch/domain/usecase/forget_password_usercase.dart';
 import 'package:clean_arch/domain/usecase/login_usecase.dart';
+import 'package:clean_arch/domain/usecase/register_usecase.dart';
 import 'package:clean_arch/prsentation/forgot_password/viewmodel/forget_password_viewmodel.dart';
 import 'package:clean_arch/prsentation/login/viewmodel/login_viewmodel.dart';
+import 'package:clean_arch/prsentation/register/viewmodel/register_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,5 +67,15 @@ void initForgetPasswordModule() {
         ForgetPasswordUsecase(getIT<AuthenticationRepository>()));
     getIT.registerFactory(() =>
         ForgetPasswordViewModel(getIT<ForgetPasswordUsecase>()));
+  }
+}
+
+
+void initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    getIT.registerFactory(() =>
+        RegisterUseCase(getIT<AuthenticationRepository>()));
+    getIT.registerFactory(() =>
+        RegisterViewModel(getIT<RegisterUseCase>()));
   }
 }

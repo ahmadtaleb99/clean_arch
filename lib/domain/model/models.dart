@@ -62,3 +62,63 @@ class ForgetPassword{
     required  this.support,
   });
 }
+
+class Service {
+  String id;
+  String title;
+  String image;
+
+  Service({
+    required this.id,
+    required this.title,
+    required this.image,
+  });
+}
+
+class Banner {
+  String id;
+  String title;
+  String image;
+
+  Banner({
+    required this.id,
+    required this.title,
+    required this.image,
+  });
+}
+
+
+class Store {
+  String id;
+  String title;
+  String image;
+
+  Store({
+    required this.id,
+    required this.title,
+    required this.image,
+  });
+}
+
+
+class HomeData {
+  List<Service>? services;
+
+  List<Banner>? banners;
+
+  List<Store>? stores;
+
+  HomeData({
+    this.services,
+    this.banners,
+    this.stores,
+  });
+}
+
+class HomeObject {
+   HomeData? data;
+
+   HomeObject({
+    this.data,
+  });
+}
