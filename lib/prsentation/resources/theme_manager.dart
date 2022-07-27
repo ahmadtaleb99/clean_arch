@@ -56,7 +56,9 @@ ThemeData getApplicationTheme() {
         subtitle1: getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
         caption: getRegularStyle(color: ColorManager.grey1),
         bodyText1: getRegularStyle(color: ColorManager.grey),
-        bodyText2: getRegularStyle(color: ColorManager.primary)
+        bodyText2: getRegularStyle(color: ColorManager.primary),
+        headline3: getBoldStyle(color: ColorManager.primary)
+
     ),
 
     //input decoration

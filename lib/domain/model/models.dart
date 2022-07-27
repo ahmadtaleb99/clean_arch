@@ -64,7 +64,7 @@ class ForgetPassword{
 }
 
 class Service {
-  String id;
+  int id;
   String title;
   String image;
 
@@ -75,12 +75,12 @@ class Service {
   });
 }
 
-class Banner {
-  String id;
+class BannerAd {
+  int id;
   String title;
   String image;
 
-  Banner({
+  BannerAd({
     required this.id,
     required this.title,
     required this.image,
@@ -89,7 +89,7 @@ class Banner {
 
 
 class Store {
-  String id;
+  int id;
   String title;
   String image;
 
@@ -102,16 +102,16 @@ class Store {
 
 
 class HomeData {
-  List<Service>? services;
+  List<Service> services;
 
-  List<Banner>? banners;
+  List<BannerAd> banners;
 
-  List<Store>? stores;
+  List<Store> stores;
 
   HomeData({
-    this.services,
-    this.banners,
-    this.stores,
+   required this.services,
+    required this.banners,
+   required this.stores,
   });
 }
 

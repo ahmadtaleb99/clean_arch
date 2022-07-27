@@ -75,7 +75,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository{
     }
   }
 
-  Future<Either<Failure, HomeObject>> getHomeData(LoginRequest loginRequest) async{
+  Future<Either<Failure, HomeObject>> getHomeData() async{
     if(!await _networkInfo.isConnected){
       return Left(ErrorType.NO_INTERNET_CONNECTION.getFailure());
     }

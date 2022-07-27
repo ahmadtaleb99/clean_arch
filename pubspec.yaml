@@ -50,6 +50,7 @@ dependencies:
   freezed: ^1.1.0
   get_it: ^7.2.0
   lottie: ^1.2.2
+  rxdart: ^0.27.5
 
 dev_dependencies:
   flutter_test:

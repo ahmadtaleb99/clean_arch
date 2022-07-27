@@ -6,10 +6,12 @@ import 'package:clean_arch/data/network/network_info.dart';
 import 'package:clean_arch/data/repository_impl/repository_impl.dart';
 import 'package:clean_arch/domain/repository/repository.dart';
 import 'package:clean_arch/domain/usecase/forget_password_usercase.dart';
+import 'package:clean_arch/domain/usecase/home_usecase.dart';
 import 'package:clean_arch/domain/usecase/login_usecase.dart';
 import 'package:clean_arch/domain/usecase/register_usecase.dart';
 import 'package:clean_arch/prsentation/forgot_password/viewmodel/forget_password_viewmodel.dart';
 import 'package:clean_arch/prsentation/login/viewmodel/login_viewmodel.dart';
+import 'package:clean_arch/prsentation/main/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:clean_arch/prsentation/register/viewmodel/register_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,5 +79,15 @@ void initRegisterModule() {
         RegisterUseCase(getIT<AuthenticationRepository>()));
     getIT.registerFactory(() =>
         RegisterViewModel(getIT<RegisterUseCase>()));
+  }
+}
+
+
+void initHomeModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    getIT.registerFactory(() =>
+        HomeUseCase(getIT<AuthenticationRepository>()));
+    getIT.registerFactory(() =>
+        HomeViewModel(getIT<HomeUseCase>()));
   }
 }

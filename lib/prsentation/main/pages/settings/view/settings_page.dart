@@ -10,6 +10,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('sett'),);
+    return Center(child: Text('sett♦'),);
   }
 }

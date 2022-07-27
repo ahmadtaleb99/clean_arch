@@ -39,16 +39,18 @@ extension ForgetPasswordMapper on ForgetPasswordResponse? {
 extension ServiceMapper on ServiceResponse? {
   Service toDomain() {
     return Service(
-        id: this?.id.orEmpty() ?? '',
+        id: this?.id ?? 0 ,
+
         title: this?.title.orEmpty() ?? '',
         image: this?.image.orEmpty() ?? '');
   }
 }
 
 extension BannerMapper on BannerResponse? {
-  Banner toDomain() {
-    return Banner(
-        id: this?.id.orEmpty() ?? '',
+  BannerAd toDomain() {
+    return BannerAd(
+        id: this?.id ?? 0 ,
+
         title: this?.title.orEmpty() ?? '',
         image: this?.image.orEmpty() ?? '');
   }
@@ -57,7 +59,7 @@ extension BannerMapper on BannerResponse? {
 extension StoreMapper on StoreResponse? {
   Store toDomain() {
     return Store(
-        id: this?.id.orEmpty() ?? '',
+        id: this?.id ?? 0 ,
         title: this?.title.orEmpty() ?? '',
         image: this?.image.orEmpty() ?? '');
   }
@@ -67,7 +69,7 @@ extension HomeObjectMapper on HomeResponse? {
   HomeObject toDomain() {
     List<Service> services =
         this?.homeDataResponse.services?.map((e) => e.toDomain()).toList() ?? [];
-    List<Banner> banners =
+    List<BannerAd> banners =
         this?.homeDataResponse.banners?.map((e) => e.toDomain()).toList() ?? [];
     List<Store> stores =
         this?.homeDataResponse.stores?.map((e) => e.toDomain()).toList() ?? [];
