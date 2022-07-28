@@ -1,4 +1,5 @@
 import 'package:clean_arch/app/app_prefs.dart';
+import 'package:clean_arch/data/data_source/local_data_source.dart';
 import 'package:clean_arch/data/data_source/remote_data_source.dart';
 import 'package:clean_arch/data/network/api_client.dart';
 import 'package:clean_arch/data/network/dio_factory.dart';
@@ -9,10 +10,12 @@ import 'package:clean_arch/domain/usecase/forget_password_usercase.dart';
 import 'package:clean_arch/domain/usecase/home_usecase.dart';
 import 'package:clean_arch/domain/usecase/login_usecase.dart';
 import 'package:clean_arch/domain/usecase/register_usecase.dart';
+import 'package:clean_arch/domain/usecase/store_details_usecase.dart';
 import 'package:clean_arch/prsentation/forgot_password/viewmodel/forget_password_viewmodel.dart';
 import 'package:clean_arch/prsentation/login/viewmodel/login_viewmodel.dart';
 import 'package:clean_arch/prsentation/main/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:clean_arch/prsentation/register/viewmodel/register_viewmodel.dart';
+import 'package:clean_arch/prsentation/store_details/viewmodel/store_details_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,9 +45,11 @@ Future<void> initAppModules() async {
   //remote data source
   getIT.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(getIT<ApiClient>()));
 
+  getIT.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
+
 
   //repository
-  getIT.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepositoryImpl(getIT<RemoteDataSource>(),NetworkInfoImpl()));
+  getIT.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepositoryImpl(getIT<RemoteDataSource>(),NetworkInfoImpl(),getIT<LocalDataSource>()));
 
 
 
@@ -91,3 +96,16 @@ void initHomeModule() {
         HomeViewModel(getIT<HomeUseCase>()));
   }
 }
+
+
+void initStoreDetails() {
+  if (!GetIt.I.isRegistered<StoreDetailsUseCase>()) {
+    getIT.registerFactory(() =>
+        StoreDetailsUseCase(getIT<AuthenticationRepository>()));
+
+
+    getIT.registerFactory(() =>
+        StoreDetailsViewModel(getIT<StoreDetailsUseCase>()));
+  }
+}
+

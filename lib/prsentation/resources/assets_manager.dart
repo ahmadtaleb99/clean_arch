@@ -15,6 +15,13 @@ class ImageAssets{
   static const String rightArrowICon = '$_imageBase/right_arrow_ic.svg';
 
 
+  static const String changeLangIcon = '$_imageBase/change_lang_ic.svg';
+  static const String contactUsIcon = '$_imageBase/contact_us_ic.svg';
+  static const String settingsRightArrowIcon = '$_imageBase/settings_right_arrow_ic.svg';
+  static const String inviteFriendsIcon = '$_imageBase/invite_friends_ic.svg';
+  static const String logoutIcon = '$_imageBase/logout_ic.svg';
+
+
 
 }
 class AnimationAssets{
@@ -24,6 +31,11 @@ class AnimationAssets{
   static const String loading = '$_animationBase/loading.json';
   static const String empty = '$_animationBase/empty.json';
   static const String success = '$_animationBase/success.json';
+
+
+}
+class LanguageAssets{
+  static const String languageAssetBase = 'assets/languages';
 
 
 }

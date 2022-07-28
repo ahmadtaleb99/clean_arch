@@ -33,4 +33,8 @@ abstract class ApiClient {
   @GET('/home')
   Future<HomeResponse> getHomeData();
 
+
+  @GET('/store-details/{id}')
+  Future<StoreDetailsResponse> getStoreDetails(@Path() int id);
+
 }

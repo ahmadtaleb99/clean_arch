@@ -5,6 +5,7 @@ import 'package:clean_arch/prsentation/login/viewmodel/login_viewmodel.dart';
 import 'package:clean_arch/prsentation/resources/assets_manager.dart';
 import 'package:clean_arch/prsentation/resources/routes_manager.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -136,8 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: snapshot.data!  ? () {
                                   _loginViewModel.login();
                                 } : null,
-                                child: const Text(
-                                  AppStrings.login,
+                                child:  Text(
+                                  AppStrings.login.tr(),
                                 ));
                           }
                         )),
@@ -154,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(context, Routes.forgotPasswordRoute);
                             },
                             child: Text(
-                              AppStrings.forgetPassword,
+                              AppStrings.forgetPassword.tr(),
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
@@ -164,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(context, Routes.registerRoute);
                             },
                         child:  Text(
-                            AppStrings.notAMember,
+                            AppStrings.notAMember.tr(),
                             style: Theme.of(context).textTheme.bodyText2,
                           )),
                         ],
@@ -249,8 +250,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: snapshot.data!  ? () {
                               _loginViewModel.login();
                             } : null,
-                            child: const Text(
-                              AppStrings.login,
+                            child:  Text(
+                              AppStrings.login.tr(),
                             ));
                       }
                   )),
@@ -267,7 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(context, Routes.forgotPasswordRoute);
                       },
                       child: Text(
-                        AppStrings.forgetPassword,
+                        AppStrings.forgetPassword.tr(),
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ),
@@ -277,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushNamed(context, Routes.registerRoute);
                         },
                         child:  Text(
-                          AppStrings.notAMember,
+                          AppStrings.notAMember.tr(),
                           style: Theme.of(context).textTheme.bodyText2,
                         )),
                   ],

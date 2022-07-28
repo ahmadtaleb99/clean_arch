@@ -6,7 +6,7 @@ import 'package:clean_arch/prsentation/onboarding_screen/view/onboarding_screen.
 import 'package:clean_arch/prsentation/register/view/register_screen.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 import 'package:clean_arch/prsentation/splash/splash_screen.dart';
-import 'package:clean_arch/prsentation/store_details/store_details_screen.dart';
+import 'package:clean_arch/prsentation/store_details/view/store_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -38,6 +38,7 @@ class RouteGenerator {
         initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case Routes.storeDetailsRoute:
+        initStoreDetails();
         return MaterialPageRoute(builder: (_) => const StoreDetailsScreen());
 
       case Routes.onBoarding:

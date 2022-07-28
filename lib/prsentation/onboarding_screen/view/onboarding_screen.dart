@@ -8,6 +8,7 @@ import 'package:clean_arch/prsentation/resources/color_manager.dart';
 import 'package:clean_arch/prsentation/resources/constants_manager.dart';
 import 'package:clean_arch/prsentation/resources/routes_manager.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:clean_arch/prsentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -78,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Navigator.pushReplacementNamed(context, Routes.loginRoute);
                     },
                     child: Text(
-                      AppStrings.skip,
+                      AppStrings.skip.tr(),
                     ),
                   ),
                   Container(
@@ -170,7 +171,7 @@ class PageWidget extends StatelessWidget {
           height: 18.h,
         ),
         Text(
-          sliderPageObject.title,
+          sliderPageObject.title.tr(),
           style: Theme.of(context).textTheme.headline1,
         ),
         SizedBox(
@@ -179,7 +180,7 @@ class PageWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.p37.w),
           child: Text(
-            sliderPageObject.subTitle,
+            sliderPageObject.subTitle.tr(),
             style: Theme.of(context).textTheme.headline2,
           ),
         ),

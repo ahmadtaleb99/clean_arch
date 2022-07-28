@@ -1,7 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:ui';
+
 const String english = 'en';
 const String arabic = 'ar';
+
+const Locale englishLocale = Locale("en", "US");
+const Locale arabicLocale =  Locale("ar", "SA");
 
 enum LanguageType { ENGLISH, ARABIC }
 

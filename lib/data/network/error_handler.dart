@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 
 
 
-
+class CacheException implements Exception{}
 class ErrorHandler implements Exception{
 
     late Failure failure;
@@ -22,19 +22,19 @@ class ErrorHandler implements Exception{
     switch(error.type){
 
       case DioErrorType.connectTimeout:
-        return ErrorType.CONNECT_TIMEOUT.getFailure();
+        return ErrorTypeEnum.CONNECT_TIMEOUT.getFailure();
         break;
       case DioErrorType.sendTimeout:
-        return ErrorType.SEND_TIMEOUT.getFailure();
+        return ErrorTypeEnum.SEND_TIMEOUT.getFailure();
 
       case DioErrorType.receiveTimeout:
-        return ErrorType.RECEIVE_TIMEOUT.getFailure();
+        return ErrorTypeEnum.RECEIVE_TIMEOUT.getFailure();
 
       case DioErrorType.cancel:
-        return ErrorType.CANCEL.getFailure();
+        return ErrorTypeEnum.CANCEL.getFailure();
 
       case DioErrorType.other:
-        return ErrorType.CONNECT_TIMEOUT.getFailure();
+        return ErrorTypeEnum.CONNECT_TIMEOUT.getFailure();
 
       case DioErrorType.response:
         if(error.response != null && error.response?.statusCode != null && error.response?.statusMessage != null) {
@@ -53,7 +53,7 @@ class ErrorHandler implements Exception{
 
 
 
-enum ErrorType {
+enum ErrorTypeEnum {
   SUCCESS,
   NO_CONTENT,
   BAD_REQUEST,
@@ -69,49 +69,49 @@ enum ErrorType {
   NO_INTERNET_CONNECTION
 }
 
-extension ErrorTypeExtenstion on ErrorType {
+extension ErrorTypeExtenstion on ErrorTypeEnum {
   Failure getFailure() {
     switch (this) {
-      case ErrorType.SUCCESS:
+      case ErrorTypeEnum.SUCCESS:
         return Failure(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
 
-      case ErrorType.NO_CONTENT:
+      case ErrorTypeEnum.NO_CONTENT:
         return Failure(ResponseCode.NO_CONTENT, ResponseMessage.NO_CONTENT);
 
-      case ErrorType.BAD_REQUEST:
+      case ErrorTypeEnum.BAD_REQUEST:
         return Failure(ResponseCode.BAD_REQUEST, ResponseMessage.BAD_REQUEST);
 
-      case ErrorType.FORBIDDEN:
+      case ErrorTypeEnum.FORBIDDEN:
         return Failure(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN);
 
-      case ErrorType.UNAUTHORISED:
+      case ErrorTypeEnum.UNAUTHORISED:
         return Failure(ResponseCode.UNAUTHORISED, ResponseMessage.UNAUTHORISED);
 
-      case ErrorType.NOT_FOUND:
+      case ErrorTypeEnum.NOT_FOUND:
         return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
 
-      case ErrorType.INTERNAL_SERVER_ERROR:
+      case ErrorTypeEnum.INTERNAL_SERVER_ERROR:
         return Failure(ResponseCode.INTERNAL_SERVER_ERROR,
             ResponseMessage.INTERNAL_SERVER_ERROR);
 
-      case ErrorType.CONNECT_TIMEOUT:
+      case ErrorTypeEnum.CONNECT_TIMEOUT:
         return Failure(
             ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
 
-      case ErrorType.CANCEL:
+      case ErrorTypeEnum.CANCEL:
         return Failure(ResponseCode.CANCEL, ResponseMessage.CANCEL);
 
-      case ErrorType.RECEIVE_TIMEOUT:
+      case ErrorTypeEnum.RECEIVE_TIMEOUT:
         return Failure(
             ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
 
-      case ErrorType.SEND_TIMEOUT:
+      case ErrorTypeEnum.SEND_TIMEOUT:
         return Failure(ResponseCode.SEND_TIMEOUT, ResponseMessage.SEND_TIMEOUT);
 
-      case ErrorType.CACHE_ERROR:
+      case ErrorTypeEnum.CACHE_ERROR:
         return Failure(ResponseCode.CACHE_ERROR, ResponseMessage.CACHE_ERROR);
 
-      case ErrorType.NO_INTERNET_CONNECTION:
+      case ErrorTypeEnum.NO_INTERNET_CONNECTION:
         return Failure(ResponseCode.NO_INTERNET_CONNECTION,
             ResponseMessage.NO_INTERNET_CONNECTION);
     }
@@ -141,7 +141,7 @@ class ResponseMessage {
   static const String NO_CONTENT =
       "success"; // success with no data (no content)
   static const String BAD_REQUEST =
-      "Bad request, Try again later"; // failure, API rejected request
+      "bad_request_error"; // failure, API rejected request
   static const String UNAUTHORISED =
       "User is unauthorised, Try again later"; // failure, user is not authorised
   static const String FORBIDDEN =

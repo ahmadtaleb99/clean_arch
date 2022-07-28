@@ -122,3 +122,22 @@ class HomeObject {
     this.data,
   });
 }
+
+
+class StoreDetails {
+  String image;
+
+  int id;
+
+  String title;
+
+  String details;
+
+  String service;
+
+  StoreDetails(
+      this.image, this.id, this.title, this.details, this.service, this.about);
+
+  String about;
+
+}

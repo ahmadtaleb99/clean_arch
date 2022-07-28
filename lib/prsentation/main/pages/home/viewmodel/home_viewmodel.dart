@@ -26,9 +26,7 @@ class HomeViewModel extends BaseViewModel with HomeViewModelInputs , HomeViewMod
 
   void _getHomeData() async{
 
-    log('loading state adding');
         inputState.add(LoadingState(stateRendererType: StateRendererType.FULLSCREEN_LOADING ));
-    log('loading state added');
 
     var either = await _homeUseCase.execute(Void);
     either.fold((failure) {

@@ -8,8 +8,10 @@ import 'package:clean_arch/prsentation/common/state_renderer/state_renderer.dart
 import 'package:clean_arch/prsentation/common/state_renderer/state_renderer_impl.dart';
 import 'package:clean_arch/prsentation/main/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:clean_arch/prsentation/resources/color_manager.dart';
+import 'package:clean_arch/prsentation/resources/routes_manager.dart';
 import 'package:clean_arch/prsentation/resources/strings_manager.dart';
 import 'package:clean_arch/prsentation/resources/values_manager.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
@@ -58,88 +60,135 @@ class _HomePageState extends State<HomePage> {
   Widget _build() {
     return SingleChildScrollView(
       child: StreamBuilder<HomeViewObject>(
-        stream: _homeViewModel.homeViewObjectOutput,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 11.h,
-              ),
-          CarouselSlider(
-          items: snapshot.data?.stores
-              .map((e) => Card(
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.r10),
-          ),
-          child: ClipRRect(   borderRadius: BorderRadius.circular(AppSize.s12),
-          child: Image.network(e.image,fit: BoxFit.cover,width: 300.w,)),
-          ))
-              .toList(),
-          options: CarouselOptions(height: 140.h,
-          viewportFraction: 1)),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
-                child: Text(
-                  AppStrings.services,
-                  style: Theme.of(context).textTheme.headline3,
+          stream: _homeViewModel.homeViewObjectOutput,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 11.h,
                 ),
-              ),
-          Container(
-          height: 142.h,
-          child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: snapshot.data?.services.length,
-          itemBuilder: (context,index){
-          return Padding(
-          padding: EdgeInsets.all(AppPadding.p8),
-          child: Card(
-          elevation: AppSize.s4,
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s12),
-          side: BorderSide(
-          color: ColorManager.primary, width: 1)),
-          margin: EdgeInsets.zero,
-          child: Column(
-          children:  [
-          ClipRRect(
-          borderRadius: BorderRadius.circular(AppSize.s12),
-          child: Image.network(
-          snapshot.data!.services[index].image,
+                snapshot.data?.stores != null ? CarouselSlider(
+                    items: snapshot.data?.stores
+                        .map((e) =>
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadius.r10),
+                          ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(AppSize.s12),
+                              child: Image.network(e.image, fit: BoxFit.cover,
+                                width: 300.w,)),
+                        ))
+                        .toList(),
+                    options: CarouselOptions(height: 140.h,
+                        viewportFraction: 1)) : CircularProgressIndicator(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 14.w, vertical: 10.h),
+                  child: Text(
+                    AppStrings.services.tr(),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headline3,
+                  ),
+                ),
+                snapshot.data?.services != null ? Container(
+                  height: 142.h,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data?.services.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(AppPadding.p8),
+                          child: Card(
+                            elevation: AppSize.s4,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    AppSize.s12),
+                                side: BorderSide(
+                                    color: ColorManager.primary, width: 1)),
+                            margin: EdgeInsets.zero,
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      AppSize.s12),
+                                  child: Image.network(
+                                    snapshot.data!.services[index].image,
 
-          fit: BoxFit.cover,
-          width: AppSize.s100,
-          height: AppSize.s100,
-          ),
-          ),
-          Padding(
-          padding:
-          const EdgeInsets.only(top: AppPadding.p8),
-          child: Align(
-          alignment: Alignment.center,
-          child: Text(
-          snapshot.data!.services[index].title,
-          style: Theme.of(context).textTheme.caption,
-          textAlign: TextAlign.center,
-          ),
-          ))
-          ],
-          ),
-          ),
-          );
+                                    fit: BoxFit.cover,
+                                    width: AppSize.s100,
+                                    height: AppSize.s100,
+                                  ),
+                                ),
+                                Padding(
+                                    padding:
+                                    const EdgeInsets.only(top: AppPadding.p8),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        snapshot.data!.services[index].title,
+                                        style: Theme
+                                            .of(context)
+                                            .textTheme
+                                            .caption,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                ) : CircularProgressIndicator(),
+                _getStoresWidget(snapshot.data?.stores)
 
-
-
-          }),
-          ),
-
-            ],
-          );
-        }
+              ],
+            );
+          }
       ),
     );
+  }
+
+  Widget _getStoresWidget(List<Store>? stores) {
+    if (stores != null) {
+      return Padding(
+        padding: const EdgeInsets.only(
+            left: AppPadding.p12, right: AppPadding.p12, top: AppPadding.p12),
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: AppSize.s8,
+              mainAxisSpacing: AppSize.s8,
+              physics: const ScrollPhysics(),
+              shrinkWrap: true,
+              children: List.generate(stores.length, (index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
+                  },
+                  child: Card(
+                    elevation: AppSize.s4,
+                    child: Image.network(
+                      stores[index].image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              }),
+            )
+          ],
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
